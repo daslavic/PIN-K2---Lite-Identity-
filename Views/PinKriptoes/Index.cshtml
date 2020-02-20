@@ -1,0 +1,51 @@
+﻿@model IEnumerable<PinTest.Models.PinKripto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Symbol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KriptoName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.USD)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Symbol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KriptoName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.USD)
+            </td>
+            <td>
+                <script src="https://widgets.coingecko.com/coingecko-coin-list-widget.js"></script>
+                <coingecko-coin-list-widget coin-ids="@item.KriptoName" currency="usd" locale="en" width="15"></coingecko-coin-list-widget>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
